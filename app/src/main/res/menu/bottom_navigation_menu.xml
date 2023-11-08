@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragment_travel"
+        android:title="travel" />
+
+    <item
+        android:id="@+id/fragment_record"
+        android:title="record" />
+
+    <item
+        android:id="@+id/fragment_schedule"
+        android:title="schedule" />
+
+    <item
+        android:id="@+id/fragment_map"
+        android:title="map" />
+
+    <item
+        android:id="@+id/fragment_setting"
+        android:title="setting" />
+</menu>

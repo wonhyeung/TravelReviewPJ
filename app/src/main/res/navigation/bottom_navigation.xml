@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation"
+    app:startDestination="@id/fragment_travel">
+
+    <fragment
+        android:id="@+id/fragment_travel"
+        android:name="com.won.travelreviewpj.travel.TravelFragment"
+        android:label="fragment_travel"
+        tools:layout="@layout/fragment_travel">
+        <action
+            android:id="@+id/action_travelFragment_to_travelWishlistFragment"
+            app:destination="@id/fragment_travel_wishlist" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_travel_wishlist"
+        android:name="com.won.travelreviewpj.travel.TravelWishlistFragment"
+        android:label="fragment_travel_wishlist"
+        tools:layout="@layout/fragment_travel_wishlist">
+        <action
+            android:id="@+id/action_fragment_travel_wishlist_to_fragment_travel_wishlist_detail"
+            app:destination="@id/fragment_travel_wishlist_detail" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_map"
+        android:name="com.won.travelreviewpj.map.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/fragment_record"
+        android:name="com.won.travelreviewpj.record.RecordFragment"
+        android:label="fragment_record"
+        tools:layout="@layout/fragment_record">
+        <action
+            android:id="@+id/action_recordFragment_to_recordFolderFragment"
+            app:destination="@id/fragment_record_folder" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_record_detail"
+        android:name="com.won.travelreviewpj.record.RecordDetailFragment"
+        android:label="fragment_record_detail"
+        tools:layout="@layout/fragment_record_detail" />
+    <fragment
+        android:id="@+id/fragment_record_folder"
+        android:name="com.won.travelreviewpj.record.RecordFolderFragment"
+        android:label="fragment_record_folder"
+        tools:layout="@layout/fragment_record_folder">
+        <action
+            android:id="@+id/action_recordFolderFragment_to_recordUpdateFragment"
+            app:destination="@id/fragment_record_update" />
+        <action
+            android:id="@+id/action_recordFolderFragment_to_recordDetailFragment"
+            app:destination="@id/fragment_record_detail" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_record_update"
+        android:name="com.won.travelreviewpj.record.RecordUpdateFragment"
+        android:label="fragment_record_update"
+        tools:layout="@layout/fragment_record_update" />
+    <fragment
+        android:id="@+id/fragment_travel_wishlist_detail"
+        android:name="com.won.travelreviewpj.travel.TravelWishlistDetailFragment"
+        android:label="fragment_travel_wishlist_detail"
+        tools:layout="@layout/fragment_travel_wishlist_detail">
+        <action
+            android:id="@+id/action_travelWishlistDetailFragment_to_travelPlanUpdateFragment"
+            app:destination="@id/fragment_travel_plan_update" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_schedule"
+        android:name="com.won.travelreviewpj.schedule.ScheduleFragment"
+        android:label="fragment_schedule"
+        tools:layout="@layout/fragment_schedule">
+        <action
+            android:id="@+id/action_scheduleFragment_to_scheduleUpdateFragment"
+            app:destination="@id/fragment_schedule_update" />
+        <action
+            android:id="@+id/action_scheduleFragment_to_scheduleDetailFragment"
+            app:destination="@id/fragment_schedule_detail" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_schedule_detail"
+        android:name="com.won.travelreviewpj.schedule.ScheduleDetailFragment"
+        android:label="fragment_schedule_detail"
+        tools:layout="@layout/fragment_schedule_detail" />
+    <fragment
+        android:id="@+id/fragment_schedule_update"
+        android:name="com.won.travelreviewpj.schedule.ScheduleUpdateFragment"
+        android:label="fragment_schedule_update"
+        tools:layout="@layout/fragment_schedule_update" />
+    <fragment
+        android:id="@+id/fragment_setting"
+        android:name="com.won.travelreviewpj.setting.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
+
+    <fragment
+        android:id="@+id/fragment_travel_plan_detail"
+        android:name="com.won.travelreviewpj.travel.TravelPlanDetailFragment"
+        android:label="fragment_travel_plan_detail"
+        tools:layout="@layout/fragment_travel_plan_detail">
+        <action
+            android:id="@+id/action_travelPlanDetailFragment_to_travelWishlistFragment"
+            app:destination="@id/fragment_travel_wishlist" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_travel_plan_update"
+        android:name="com.won.travelreviewpj.travel.TravelPlanUpdateFragment"
+        android:label="fragment_travel_plan_update"
+        tools:layout="@layout/fragment_travel_plan_update">
+        <action
+            android:id="@+id/action_travelPlanUpdateFragment_to_travelPlanDetailFragment"
+            app:destination="@id/fragment_travel_plan_detail" />
+    </fragment>
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.won.travelreviewpj.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+</navigation>
