@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TravelReviewPJ"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.naver.maps.map.r5qlsm0iph"
+            android:value="API_KEY" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
