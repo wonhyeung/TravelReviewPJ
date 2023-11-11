@@ -1,26 +1,36 @@
 package com.won.travelreviewpj.travel
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.won.travelreviewpj.R
+import androidx.navigation.fragment.findNavController
+import com.won.travelreviewpj.common.ViewBindingBaseFragment
+import com.won.travelreviewpj.databinding.FragmentTravelBinding
 
 
-class TravelFragment : Fragment() {
+class TravelFragment : ViewBindingBaseFragment<FragmentTravelBinding>(FragmentTravelBinding::inflate) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_travel, container, false)
+        _binding = FragmentTravelBinding.inflate(inflater, container, false)
+        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        with(binding) {
+            ibTravelWishlist.setOnClickListener {
+                val action =
+                    TravelFragmentDirections.actionTravelFragmentToTravelWishlistFragment()
+                findNavController().navigate(action)
+            }
+        }
+    }
+
 
 
 }

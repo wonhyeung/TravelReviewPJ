@@ -71,7 +71,9 @@
                     android:layout_alignTop="@id/iv_record_update_destination_clip"
                     android:layout_alignBottom="@id/iv_record_update_destination_clip"
                     android:layout_marginStart="70dp"
-                    android:text="아아아"
+                    android:layout_marginEnd="30dp"
+                    android:maxLines="1"
+                    android:text="아아"
                     android:textSize="12sp" />
 
 
@@ -111,6 +113,8 @@
                     android:layout_alignBottom="@id/iv_record_update_companion_clip"
                     android:layout_marginStart="70dp"
                     android:text="아아아"
+                    android:layout_marginEnd="30dp"
+                    android:maxLines="1"
                     android:textSize="12sp" />
 
             </RelativeLayout>
@@ -148,7 +152,9 @@
                     android:layout_alignTop="@id/iv_record_update_date_clip"
                     android:layout_alignBottom="@id/iv_record_update_date_clip"
                     android:layout_marginStart="70dp"
-                    android:text="아아아"
+                    android:layout_marginEnd="30dp"
+                    android:maxLines="1"
+                    android:text="아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아"
                     android:textSize="12sp" />
             </RelativeLayout>
 
@@ -174,18 +180,20 @@
                 <ImageView
                     android:id="@+id/iv_record_update_plan_clip"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="300dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/writing" />
 
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/iv_record_update_plan_clip"
                     android:layout_marginStart="70dp"
                     android:layout_marginTop="30dp"
-                    android:text="아아아"
+                    android:maxLines="12"
+                    android:layout_marginEnd="30dp"
+                    android:text="dk아아"
                     android:textSize="12sp" />
             </RelativeLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
