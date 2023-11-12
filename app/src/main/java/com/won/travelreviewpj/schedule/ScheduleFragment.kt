@@ -5,22 +5,37 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.won.travelreviewpj.R
+import com.won.travelreviewpj.common.ViewBindingBaseFragment
+import com.won.travelreviewpj.databinding.FragmentRecordFolderBinding
+import com.won.travelreviewpj.databinding.FragmentScheduleBinding
+import com.won.travelreviewpj.record.RecordFolderFragmentDirections
 
 
-class ScheduleFragment : Fragment() {
+class ScheduleFragment :
+    ViewBindingBaseFragment<FragmentScheduleBinding>(FragmentScheduleBinding::inflate) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_schedule, container, false)
+        _binding = FragmentScheduleBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        with(binding){
+            tbSchedule.setOnMenuItemClickListener {item ->
+                if(item.itemId == R.id.btn_add) {
+                    val action =
+                        ScheduleFragmentDirections.actionScheduleFragmentToScheduleUpdateFragment()
+                    findNavController().navigate(action)
+                }
+                true
+            }
+        }
+    }
 }

@@ -5,22 +5,35 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.won.travelreviewpj.R
+import com.won.travelreviewpj.common.ViewBindingBaseFragment
+import com.won.travelreviewpj.databinding.FragmentRecordBinding
+import com.won.travelreviewpj.databinding.FragmentRecordFolderBinding
 
-class RecordFolderFragment : Fragment() {
+class RecordFolderFragment : ViewBindingBaseFragment<FragmentRecordFolderBinding>(FragmentRecordFolderBinding::inflate) {
     // TODO: Rename and change types of parameters
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_record_folder, container, false)
+        _binding = FragmentRecordFolderBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        with(binding){
+            tbRecordFolder.setOnMenuItemClickListener {item ->
+                if(item.itemId == R.id.btn_add) {
+                    val action =
+                        RecordFolderFragmentDirections.actionRecordFolderFragmentToRecordUpdateFragment()
+                    findNavController().navigate(action)
+                }
+                true
+            }
+        }
     }
 
 
