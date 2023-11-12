@@ -32,5 +32,4 @@ class TravelFragment : ViewBindingBaseFragment<FragmentTravelBinding>(FragmentTr
     }
 
 
-
 }

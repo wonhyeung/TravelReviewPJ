@@ -4,8 +4,8 @@
 
     <item
         android:icon="@drawable/baseline_check_24"
-        android:id="@+id/btn_add"
+        android:id="@+id/btn_update"
         app:showAsAction="always"
-        android:title="add" />
+        android:title="update" />
 
 </menu>
