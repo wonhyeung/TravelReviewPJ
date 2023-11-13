@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_clip"
@@ -15,7 +15,7 @@
         app:srcCompat="@drawable/clip_note" />
 
     <ImageView
-        android:id="@+id/iv_record"
+        android:id="@+id/iv_notepad_record"
         android:layout_width="90dp"
         android:layout_height="80dp"
         android:layout_alignStart="@id/iv_clip"
@@ -26,20 +26,21 @@
         android:src="@drawable/travel_sample" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_record_name"
+        android:id="@+id/tv_notepad_record"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/iv_record"
-        android:layout_alignStart="@id/iv_record"
+        android:layout_below="@+id/iv_notepad_record"
+        android:layout_alignStart="@id/iv_notepad_record"
         android:text="#공원"
         android:textSize="10sp"
         android:textStyle="bold" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_notepad_companion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_record_name"
-        android:layout_alignStart="@id/tv_record_name"
+        android:layout_below="@id/tv_notepad_record"
+        android:layout_alignStart="@id/tv_notepad_record"
         android:layout_marginTop="3dp"
         android:text="#혼자"
         android:textSize="6sp" />
