@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".travel.TravelWishlistFragment">
+    tools:context=".travel.wishlist.TravelWishlistFragment">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_travel_wishlist_title"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_travel_wishlist_select"
+        android:id="@+id/rv_travel_wishlist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"

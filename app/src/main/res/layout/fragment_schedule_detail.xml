@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFEDDA"
-    tools:context=".schedule.ScheduleDetailFragment">
+    tools:context=".schedule.detail.ScheduleDetailFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/tb_schedule_detail"

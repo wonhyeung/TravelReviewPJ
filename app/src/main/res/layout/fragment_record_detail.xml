@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#FFEDDA"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".record.RecordDetailFragment">
+    tools:context=".record.detail.RecordDetailFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/tb_record_detail"
