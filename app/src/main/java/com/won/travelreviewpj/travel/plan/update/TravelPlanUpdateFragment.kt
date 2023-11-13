@@ -1,4 +1,4 @@
-package com.won.travelreviewpj.record
+package com.won.travelreviewpj.travel.plan.update
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.won.travelreviewpj.R
 
-class RecordUpdateFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
+class TravelPlanUpdateFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +20,7 @@ class RecordUpdateFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_record_update, container, false)
+        return inflater.inflate(R.layout.fragment_travel_plan_update, container, false)
     }
 
 }

@@ -1,14 +1,12 @@
-package com.won.travelreviewpj.record
+package com.won.travelreviewpj.record.folder
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.won.travelreviewpj.R
 import com.won.travelreviewpj.common.ViewBindingBaseFragment
-import com.won.travelreviewpj.databinding.FragmentRecordBinding
 import com.won.travelreviewpj.databinding.FragmentRecordFolderBinding
 
 class RecordFolderFragment : ViewBindingBaseFragment<FragmentRecordFolderBinding>(FragmentRecordFolderBinding::inflate) {
