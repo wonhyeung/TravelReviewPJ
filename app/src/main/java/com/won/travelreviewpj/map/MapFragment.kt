@@ -1,15 +1,23 @@
 package com.won.travelreviewpj.map
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.naver.maps.map.NaverMapSdk
 import com.won.travelreviewpj.R
+import com.won.travelreviewpj.common.ViewBindingBaseFragment
+import com.won.travelreviewpj.databinding.FragmentMapBinding
 
 
-class MapFragment :  Fragment() {
+class MapFragment : ViewBindingBaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate) {
+
+    private fun item() = mutableListOf<Map>().apply {
+        add(Map(R.drawable.travel_sample, "111", "혼자"))
+        add(Map(R.drawable.travel_sample, "112", "혼자"))
+        add(Map(R.drawable.travel_sample, "113", "혼자"))
+        add(Map(R.drawable.travel_sample, "114", "혼자"))
+        add(Map(R.drawable.travel_sample, "115", "혼자"))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,13 +25,16 @@ class MapFragment :  Fragment() {
             NaverMapSdk.NaverCloudPlatformClient("r5qlsm0iph")
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_map, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        val manager = LinearLayoutManager(
+            context, LinearLayoutManager.VERTICAL, false
+        )
+        with(binding) {
+            rvMap.layoutManager = manager
+            rvMap.adapter = MapAdapter(item())
+        }
     }
 
 

@@ -1,4 +1,7 @@
 package com.won.travelreviewpj.travel.wishlist
 
-class TravelWishlistViewModel {
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+
+class TravelWishlistViewModel(application: Application) : AndroidViewModel(application) {
 }

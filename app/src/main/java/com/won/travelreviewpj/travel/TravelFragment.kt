@@ -9,7 +9,8 @@ import com.won.travelreviewpj.common.ViewBindingBaseFragment
 import com.won.travelreviewpj.databinding.FragmentTravelBinding
 
 
-class TravelFragment : ViewBindingBaseFragment<FragmentTravelBinding>(FragmentTravelBinding::inflate) {
+class TravelFragment :
+    ViewBindingBaseFragment<FragmentTravelBinding>(FragmentTravelBinding::inflate) {
 
 
     override fun onCreateView(
@@ -25,7 +26,7 @@ class TravelFragment : ViewBindingBaseFragment<FragmentTravelBinding>(FragmentTr
         with(binding) {
             ibTravelWishlist.setOnClickListener {
                 val action =
-                    TravelFragmentDirections.actionTravelFragmentToTravelWishlistFragment()
+                    TravelFragmentDirections.actionFragmentTravelToFragmentTravelWishlist()
                 findNavController().navigate(action)
             }
         }
