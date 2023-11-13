@@ -111,5 +111,6 @@
     <include
         android:id="@+id/bs_travel"
         layout="@layout/fragment_travel_bottomsheet" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
