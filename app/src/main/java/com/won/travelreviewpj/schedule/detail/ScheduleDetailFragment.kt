@@ -1,4 +1,4 @@
-package com.won.travelreviewpj.record
+package com.won.travelreviewpj.schedule.detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import com.won.travelreviewpj.R
 
 
-class RecordDetailFragment : Fragment() {
-
+class ScheduleDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +20,8 @@ class RecordDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_record_detail, container, false)
+        return inflater.inflate(R.layout.fragment_schedule_detail, container, false)
     }
+
 
 }
