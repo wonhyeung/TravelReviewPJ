@@ -117,42 +117,6 @@
 
             </RelativeLayout>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_travel_plan_update_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="6dp"
-                android:text="언제?"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rl_travel_plan_update_companion" />
-
-            <RelativeLayout
-                android:id="@+id/rl_travel_plan_update_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_travel_plan_update_date">
-
-                <ImageView
-                    android:id="@+id/iv_travel_plan_update_date_clip"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/writing" />
-
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/iv_travel_plan_update_date_clip"
-                    android:layout_alignBottom="@id/iv_travel_plan_update_date_clip"
-                    android:layout_marginStart="70dp"
-                    android:text="아아아"
-                    android:textSize="12sp" />
-            </RelativeLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_travel_plan_update_plan"
@@ -163,7 +127,7 @@
                 android:text="여행 계획"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rl_travel_plan_update_date" />
+                app:layout_constraintTop_toBottomOf="@id/rl_travel_plan_update_companion" />
 
             <RelativeLayout
                 android:id="@+id/rl_travel_plan_update_plan"
