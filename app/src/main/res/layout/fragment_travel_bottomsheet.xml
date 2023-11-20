@@ -64,16 +64,18 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/iv_bottom_travel_wish"
+        <ImageButton
+            android:id="@+id/ib_bottom_travel_wish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
             android:src="@drawable/baseline_favorite_24"
-            app:tint="#FF0000" />
+            app:tint="@color/white" />
 
 
     </RelativeLayout>
