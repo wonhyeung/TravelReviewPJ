@@ -1,16 +1,10 @@
 package com.won.travelreviewpj.travel.wishlist
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.won.travelreviewpj.travel.TravelEntity
-import com.won.travelreviewpj.travel.TravelRepository
 import com.won.travelreviewpj.travel.wishlist.db.TravelWishlistRepository
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 

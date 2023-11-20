@@ -1,23 +1,24 @@
 package com.won.travelreviewpj.travel.wishlist
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.won.travelreviewpj.databinding.ItemTravelWishlistBinding
-import com.won.travelreviewpj.travel.TravelEntity
 
 class TravelWishlistAdapter(
-    var arrayList: MutableList<TravelWishlist>
-
+    var arrayList: MutableList<TravelWishlist>,
 ) :
     RecyclerView.Adapter<TravelWishlistAdapter.ItemHolder>() {
     inner class ItemHolder(val binding: ItemTravelWishlistBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root) {
+
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         val binding =
@@ -36,11 +37,16 @@ class TravelWishlistAdapter(
                 .load(item.wishlistImage)
                 .centerCrop()
                 .into(ivItemTravelWishlist)
-            root.setOnClickListener {
+            llItemTravelWishlistInfo.setOnClickListener {
                 val action =
                     TravelWishlistFragmentDirections.actionFragmentTravelWishlistToFragmentTravelPlanUpdate()
                 it.findNavController().navigate(action)
             }
+            ivItemTravelWishlist.setOnClickListener {
+                val action = TravelWishlistFragmentDirections.actionFragmentTravelWishlistToFragmentTravelWishlistDetail()
+                it.findNavController().navigate(action)
+            }
+
         }
     }
 
@@ -51,6 +57,7 @@ class TravelWishlistAdapter(
         arrayList = travelWishLists.toMutableList()
         notifyDataSetChanged()
     }
+
 }
 
 
