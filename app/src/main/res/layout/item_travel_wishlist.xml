@@ -37,17 +37,5 @@
         app:layout_constraintBottom_toBottomOf="@id/iv_item_travel_wishlist"
         app:layout_constraintStart_toEndOf="@id/iv_item_travel_wishlist" />
 
-    <ImageButton
-        android:id="@+id/iB_item_travel_wishlist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:background="@android:color/transparent"
-        android:padding="10dp"
-        android:src="@drawable/baseline_settings_24"
-        app:layout_constraintBottom_toBottomOf="@id/iv_item_travel_wishlist"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
