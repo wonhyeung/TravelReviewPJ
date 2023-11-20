@@ -33,16 +33,6 @@
         app:layout_constraintTop_toBottomOf="@id/tv_travel_wishlist_detail_destination" />
 
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/mb_travel_wishlist_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:text="여행 계획"
-        app:layout_constraintBottom_toBottomOf="@id/gl_image_top"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_image_top"
         android:layout_width="wrap_content"
