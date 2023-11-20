@@ -1,3 +1,21 @@
 package com.won.travelreviewpj.travel.wishlist
 
-data class TravelWishlist(var travelImage: Int, var travelTitle: String, var travelLocation: String)
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.won.travelreviewpj.travel.TravelEntity
+
+@Entity(tableName = "wishlist_tbl")
+data class TravelWishlist(
+    @ColumnInfo(name = "wishlistTitle")
+    var wishlistTitle: String = "",
+    @ColumnInfo(name = "wishlistAddress")
+    var wishlistAddress: String = "",
+    @ColumnInfo(name = "wishlistImage")
+    var wishlistImage: String = "",
+    @ColumnInfo(name = "wishlistOverrview")
+    var wishlistOverview: String = "",
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    var id: Long = 0L,
+)

@@ -1,24 +1,29 @@
 package com.won.travelreviewpj.travel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.won.travelreviewpj.common.SERVICE_KEY
-import kotlinx.coroutines.Dispatchers
+import com.won.travelreviewpj.travel.wishlist.TravelWishlist
+import com.won.travelreviewpj.travel.wishlist.db.TravelWishlistRepository
 import kotlinx.coroutines.launch
 
-class TravelViewModel() : ViewModel() {
-    val travelData: MutableLiveData<TravelEntity?> = MutableLiveData()
+class TravelViewModel(application: Application) : AndroidViewModel(application) {
     private val travelRepository = TravelRepository()
-    fun getTravelData() = viewModelScope.launch(Dispatchers.IO) {
-        val response = travelRepository.getRetrofit()
-        response.let {
-            if (response.isSuccessful) {
-                val travelList =
-                    response.body()?.response?.body?.items?.travelEntities.orEmpty().firstOrNull()
-                travelData.postValue(travelList)
-            }
+    val travelData: MutableLiveData<TravelEntity?> = travelRepository.travelData
+    private val travelWishlistRepository: TravelWishlistRepository = TravelWishlistRepository(application)
+    private val searchResults: MutableLiveData<TravelWishlist> = travelWishlistRepository.searchResults
+
+    fun insertTravelWishlist(travelWishlist: TravelWishlist) {
+        travelWishlistRepository.insertTravelWishlist(travelWishlist)
+    }
+    fun getTravelData() = viewModelScope.launch {
+        if(travelData.value == null) {
+            travelRepository.getTravelData()
         }
     }
-
+    fun getResetData() = viewModelScope.launch {
+        travelRepository.getTravelData()
+    }
 }
