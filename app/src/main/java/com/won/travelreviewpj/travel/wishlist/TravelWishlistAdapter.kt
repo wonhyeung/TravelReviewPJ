@@ -1,34 +1,36 @@
 package com.won.travelreviewpj.travel.wishlist
 
 import android.annotation.SuppressLint
-import android.app.Application
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.won.travelreviewpj.databinding.ItemTravelWishlistBinding
 
 class TravelWishlistAdapter(
     var arrayList: MutableList<TravelWishlist>,
+    private val viewModel: TravelWishlistViewModel
 ) :
     RecyclerView.Adapter<TravelWishlistAdapter.ItemHolder>() {
     inner class ItemHolder(val binding: ItemTravelWishlistBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-    }
-
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         val binding =
             ItemTravelWishlistBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        Log.e("onCreateViewHOlder", "onCreateViewHOlder")
         return ItemHolder(binding)
     }
 
+
+
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        Log.e("onBIndViewHOlder", "onBIndViewHOlder")
         var item = arrayList[position]
         with(holder.binding) {
             tvItemTravelWishlistTitle.text = item.wishlistTitle
@@ -43,10 +45,13 @@ class TravelWishlistAdapter(
                 it.findNavController().navigate(action)
             }
             ivItemTravelWishlist.setOnClickListener {
-                val action = TravelWishlistFragmentDirections.actionFragmentTravelWishlistToFragmentTravelWishlistDetail()
+                val action =
+                    TravelWishlistFragmentDirections.actionFragmentTravelWishlistToFragmentTravelWishlistDetail(item.id)
                 it.findNavController().navigate(action)
             }
-
+            ivItemTravelWishlist.setOnClickListener {
+                viewModel.deleteTravelWishlist(item.id)
+            }
         }
     }
 

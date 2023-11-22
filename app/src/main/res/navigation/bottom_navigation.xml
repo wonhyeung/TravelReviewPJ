@@ -10,7 +10,6 @@
         android:name="com.won.travelreviewpj.travel.TravelFragment"
         android:label="fragment_travel"
         tools:layout="@layout/fragment_travel">
-
         <action
             android:id="@+id/action_fragment_travel_to_fragment_travel_wishlist"
             app:destination="@id/fragment_travel_wishlist" />
@@ -23,7 +22,13 @@
         tools:layout="@layout/fragment_travel_wishlist">
         <action
             android:id="@+id/action_fragment_travel_wishlist_to_fragment_travel_wishlist_detail"
-            app:destination="@id/fragment_travel_wishlist_detail" />
+            app:destination="@id/fragment_travel_wishlist_detail">
+
+            <argument
+                android:name="travelWishlistId"
+                app:argType="long" />
+
+        </action>
         <action
             android:id="@+id/action_fragment_travel_wishlist_to_fragment_travel_plan_update"
             app:destination="@id/fragment_travel_plan_update" />

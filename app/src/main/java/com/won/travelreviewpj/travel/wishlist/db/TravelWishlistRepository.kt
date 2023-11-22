@@ -36,8 +36,8 @@ class TravelWishlistRepository(application: Application) {
     }
 
     fun findTravelWishlist(id: Long) {
-        coroutineScope.launch {
-            searchResults.value = coroutineScope.async {
+        CoroutineScope(Dispatchers.Main).launch {
+            searchResults.value = coroutineScope.async(Dispatchers.IO) {
                 return@async travelWishlistDao.findTravelWishlist(id)
             }.await()
         }

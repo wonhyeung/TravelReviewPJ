@@ -1,25 +1,56 @@
 package com.won.travelreviewpj.travel.wishlist.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.won.travelreviewpj.R
+import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
+import com.won.travelreviewpj.common.ViewBindingBaseFragment
+import com.won.travelreviewpj.databinding.FragmentTravelWishlistDetailBinding
+import com.won.travelreviewpj.travel.wishlist.TravelWishlistViewModel
 
-class TravelWishlistDetailFragment : Fragment() {
+class TravelWishlistDetailFragment :
+    ViewBindingBaseFragment<FragmentTravelWishlistDetailBinding>(FragmentTravelWishlistDetailBinding::inflate) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private val viewModel: TravelWishlistDetailViewModel by viewModels()
+  //  private val travelWishlistArgs: TravelFragmentArgs by navArgs()
+    private val travelWishlistViewModel: TravelWishlistViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_travel_wishlist_detail, container, false)
+        _binding = FragmentTravelWishlistDetailBinding.inflate(inflater, container, false)
+        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        fieldSetUp()
+    }
+
+    private fun fieldSetUp() {
+        val id = arguments?.getLong("travelWishlistId")
+        id?.let { viewModel.findWishlist(it) }
+        Log.e("id", "$id")
+        viewModel.getSearchResults().observe(viewLifecycleOwner) { travelWishlist ->
+            with(binding) {
+                tvTravelWishlistDetailTitle.text = travelWishlist?.wishlistTitle
+                Log.e("travelWishlist", "${travelWishlist?.wishlistTitle}")
+
+                tvTravelWishlistDetailAddress.text = travelWishlist?.wishlistAddress
+                tvTravelWishlistDetailExplanation.text = travelWishlist?.wishlistOverview
+                Glide.with(requireContext())
+                    .load(travelWishlist?.wishlistImage)
+                    .centerCrop()
+                    .into(ivTravelWishlistDetail)
+            }
+
+        }
+
+    }
+
 
 }

@@ -19,25 +19,30 @@ class TravelWishlistFragment :
     ViewBindingBaseFragment<FragmentTravelWishlistBinding>(FragmentTravelWishlistBinding::inflate) {
 
     private val wishListViewModel: TravelWishlistViewModel by viewModels()
-    private val adapter = TravelWishlistAdapter(mutableListOf())
+    private lateinit var adapter: TravelWishlistAdapter
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val swipeCallback = TravelWishlistSwipeCallback(adapter).apply {
-            setClamp(resources.displayMetrics.widthPixels.toFloat() / 4)
+        adapter = TravelWishlistAdapter(mutableListOf(), wishListViewModel)
+        val swipeCallback = TravelWishlistSwipeCallback().apply {
+            setClamp(200f)
         }
-        ItemTouchHelper(swipeCallback).attachToRecyclerView(binding.rvTravelWishlist)
+        val itemTouchHelper = ItemTouchHelper(swipeCallback)
+        itemTouchHelper.attachToRecyclerView(binding.rvTravelWishlist)
+
         val manager = LinearLayoutManager(
             context, LinearLayoutManager.VERTICAL, false
         )
         with(binding) {
             rvTravelWishlist.layoutManager = manager
             rvTravelWishlist.adapter = adapter
-            /* 화면 터치시 다른 item 닫기
             rvTravelWishlist.setOnTouchListener { _, _ ->
-                swipeCallback.removePreviousClamp(binding.rvTravelWishlist)
+                swipeCallback.removePreviousClamp(rvTravelWishlist)
                 false
-            }*/
+            }
         }
+
         wishListViewModel.getAllTravelWishlist()?.observe(viewLifecycleOwner) { travelWishlists ->
             adapter.setTravelWishList(travelWishlists)
         }
