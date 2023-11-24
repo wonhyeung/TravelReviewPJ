@@ -1,41 +1,174 @@
 package com.won.travelreviewpj.record
 
+import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import android.view.WindowManager
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.FieldPath
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.firestore
 import com.won.travelreviewpj.R
 import com.won.travelreviewpj.common.ViewBindingBaseFragment
 import com.won.travelreviewpj.databinding.FragmentRecordBinding
-import com.won.travelreviewpj.travel.TravelFragmentDirections
-import com.won.travelreviewpj.travel.wishlist.TravelWishlist
-import com.won.travelreviewpj.travel.wishlist.TravelWishlistAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 class RecordFragment :
     ViewBindingBaseFragment<FragmentRecordBinding>(FragmentRecordBinding::inflate) {
 
-    private fun item() = mutableListOf<Record>().apply {
-        add(Record(R.drawable.empty_folder_blue, "111"))
-        add(Record(R.drawable.empty_folder_blue, "112"))
-        add(Record(R.drawable.empty_folder_blue, "113"))
-        add(Record(R.drawable.empty_folder_blue, "114"))
-        add(Record(R.drawable.empty_folder_blue, "115"))
-    }
+    private var recordGridLayoutManager: GridLayoutManager? = null
+    private val fireStoreDB = Firebase.firestore
+    private val fireStoreCollectionName = "folder_collection"
+    private lateinit var recordAdapter: RecordAdapter
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        notifyRecord()
+        bindingSet()
+        getFireStoreRecord()
 
-        val manager = LinearLayoutManager(
-            context, LinearLayoutManager.VERTICAL, false
-        )
+    }
+
+    private fun bindingSet() {
         with(binding) {
-            rvRecordSelect.layoutManager = manager
-            rvRecordSelect.adapter = RecordAdapter(item())
+            tbRecord.setOnMenuItemClickListener { item ->
+                if (item.itemId == R.id.btn_add) {
+                    dialogShow()
+                }
+                true
+            }
         }
     }
+
+    private fun dialogShow() {
+        val inflater = LayoutInflater.from(context)
+        val dialogView = inflater.inflate(R.layout.item_folder_create, null)
+        val editText = dialogView.findViewById<EditText>(R.id.et_item_folder_create)
+        val button = dialogView.findViewById<Button>(R.id.mb_item_folder_create)
+        editText.requestFocus()
+        val dialog = AlertDialog.Builder(context)
+            .setView(dialogView)
+            .create()
+
+
+        dialog.window?.apply {
+            setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+            setLayout(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.WRAP_CONTENT
+            )
+            setGravity(Gravity.BOTTOM)
+        }
+        dialog.show()
+
+        imageSelector(dialogView)
+
+        button.setOnClickListener {
+            val record = Record(editText.text.toString(), selectedImageResource)
+            insertFireStore(record)
+            dialog.dismiss()
+        }
+
+    }
+
+    private var selectedImageResource: Int = R.drawable.empty_folder_red
+    private fun imageSelector(dialog: View) {
+
+        val imageViews = listOf(
+            Pair(
+                dialog.findViewById(R.id.iv_item_folder_red),
+                R.drawable.empty_folder_red
+            ),
+            Pair(
+                dialog.findViewById(R.id.iv_item_folder_orange),
+                R.drawable.empty_folder_orange
+            ),
+            Pair(
+                dialog.findViewById(R.id.iv_item_folder_yellow),
+                R.drawable.empty_folder_yellow
+            ),
+            Pair(
+                dialog.findViewById(R.id.iv_item_folder_green),
+                R.drawable.empty_folder_green
+            ),
+            Pair(
+                dialog.findViewById(R.id.iv_item_folder_blue),
+                R.drawable.empty_folder_blue
+            ),
+            Pair(
+                dialog.findViewById(R.id.iv_item_folder_purple),
+                R.drawable.empty_folder_purple
+            ),
+            Pair(
+                dialog.findViewById<ImageView>(R.id.iv_item_folder_pink),
+                R.drawable.empty_folder_pink
+            ),
+        )
+        for ((imageView, imageResource) in imageViews) {
+            imageView.setOnClickListener {
+                for ((iv, _) in imageViews) {
+                    Log.e("image", "$iv")
+                    iv.isSelected = false
+                    iv.setBackgroundResource(0)
+                }
+                Log.e("image", "")
+                it.isSelected = true
+                it.setBackgroundResource(R.drawable.baseline_check_24)
+
+                selectedImageResource = imageResource // 선택한 이미지 리소스 ID 저장
+
+            }
+        }
+
+    }
+
+    private fun insertFireStore(record: Record) {
+        val documentRef = fireStoreDB.collection(fireStoreCollectionName)
+        documentRef.add(record.toMap()).addOnSuccessListener {
+            Toast.makeText(context, "success", Toast.LENGTH_SHORT).show()
+            getFireStoreRecord()
+        }
+    }
+
+
+    private fun getFireStoreRecord() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val records: List<Record> =
+                fireStoreDB.collection(fireStoreCollectionName)
+                    .orderBy(FieldPath.documentId(), Query.Direction.ASCENDING)
+                    .get().await().toObjects(Record::class.java)
+            lifecycleScope.launch(Dispatchers.Main) {
+                notifyRecord(records)
+            }
+        }
+    }
+
+    private fun notifyRecord(records: List<Record> = emptyList()) {
+        recordAdapter = RecordAdapter(R.layout.item_folder)
+        with(binding) {
+            recordGridLayoutManager =
+                GridLayoutManager(context, 2, LinearLayoutManager.VERTICAL, false)
+            rvRecordSelect.layoutManager = recordGridLayoutManager
+            rvRecordSelect.setHasFixedSize(true)
+            recordAdapter.notifyRecordList(records)
+
+            rvRecordSelect.adapter = recordAdapter
+        }
+    }
+
 }
 
 
