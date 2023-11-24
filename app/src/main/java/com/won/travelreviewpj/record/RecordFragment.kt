@@ -11,28 +11,21 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.Firebase
-import com.google.firebase.firestore.FieldPath
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.firestore
 import com.won.travelreviewpj.R
 import com.won.travelreviewpj.common.ViewBindingBaseFragment
 import com.won.travelreviewpj.databinding.FragmentRecordBinding
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 
 class RecordFragment :
     ViewBindingBaseFragment<FragmentRecordBinding>(FragmentRecordBinding::inflate) {
 
     private var recordGridLayoutManager: GridLayoutManager? = null
-    private val fireStoreDB = Firebase.firestore
-    private val fireStoreCollectionName = "folder_collection"
     private lateinit var recordAdapter: RecordAdapter
-
+    private val recordViewModel: RecordViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -136,23 +129,18 @@ class RecordFragment :
     }
 
     private fun insertFireStore(record: Record) {
-        val documentRef = fireStoreDB.collection(fireStoreCollectionName)
-        documentRef.add(record.toMap()).addOnSuccessListener {
-            Toast.makeText(context, "success", Toast.LENGTH_SHORT).show()
+        lifecycleScope.launch {
+            recordViewModel.insertRecord(record)
+            Toast.makeText(context, "파일 생성", Toast.LENGTH_SHORT).show()
             getFireStoreRecord()
         }
     }
 
 
     private fun getFireStoreRecord() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            val records: List<Record> =
-                fireStoreDB.collection(fireStoreCollectionName)
-                    .orderBy(FieldPath.documentId(), Query.Direction.ASCENDING)
-                    .get().await().toObjects(Record::class.java)
-            lifecycleScope.launch(Dispatchers.Main) {
-                notifyRecord(records)
-            }
+        lifecycleScope.launch {
+            val records = recordViewModel.getRecords()
+            notifyRecord(records)
         }
     }
 
