@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -41,7 +42,10 @@ android {
 }
 
 dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
+    implementation("com.google.firebase:firebase-analytics")
     implementation("androidx.room:room-runtime:2.6.0")
+    implementation("com.google.firebase:firebase-firestore:24.9.1")
     kapt("androidx.room:room-compiler:2.6.0")
     implementation("com.github.bumptech.glide:glide:4.14.2")
     implementation("androidx.room:room-common:2.6.0")
