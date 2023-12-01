@@ -28,12 +28,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_item_travel_wishlist_companion"
+        android:id="@+id/tv_item_travel_wishlist_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="25dp"
-        android:text="혼자"
+        android:text="서울시"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_item_travel_wishlist"
         app:layout_constraintStart_toEndOf="@id/iv_item_travel_wishlist" />
