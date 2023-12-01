@@ -3,7 +3,6 @@ package com.won.travelreviewpj.travel.wishlist
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.won.travelreviewpj.travel.TravelEntity
 
 @Entity(tableName = "wishlist_tbl")
 data class TravelWishlist(

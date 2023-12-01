@@ -2,7 +2,6 @@ package com.won.travelreviewpj.travel.wishlist
 
 import android.graphics.Canvas
 import android.view.View
-import android.widget.Button
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.ACTION_STATE_SWIPE
 import androidx.recyclerview.widget.ItemTouchHelper.LEFT
@@ -36,27 +35,17 @@ class TravelWishlistSwipeCallback : ItemTouchHelper.Callback() {
     override fun clearView(recyclerView: RecyclerView, viewHolder: ViewHolder) {
         currentDx = 0f
         getDefaultUIUtil().clearView(getView(viewHolder))
-        previousPosition = viewHolder.adapterPosition
+        previousPosition = viewHolder.absoluteAdapterPosition
     }
 
 
     override fun onSelectedChanged(viewHolder: ViewHolder?, actionState: Int) {
         viewHolder?.let {
-            currentPosition = viewHolder.adapterPosition
+            currentPosition = viewHolder.absoluteAdapterPosition
             getDefaultUIUtil().onSelected(getView(it))
         }
     }
 
-    /*
-    override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
-    super.onSelectedChanged(viewHolder, actionState)
-    if (actionState == ACTION_STATE_SWIPE) {
-    val deleteButton: Button =
-    viewHolder?.itemView?.findViewById(R.id.tv_item_travel_delete) ?: return
-    deleteButton.isClickable = false
-    }
-    }
-     */
     override fun getSwipeEscapeVelocity(defaultValue: Float): Float {
         return defaultValue * 10
     }
@@ -81,7 +70,7 @@ class TravelWishlistSwipeCallback : ItemTouchHelper.Callback() {
             val isClamped = getTag(viewHolder)
             val x = clampViewPositionHorizontal(view, dX, isClamped, isCurrentlyActive)
 
-            if(x == -clamp) {
+            if (x == -clamp) {
                 getView(viewHolder).animate().translationX(-clamp).setDuration(100L).start()
             }
             currentDx = x
@@ -97,7 +86,6 @@ class TravelWishlistSwipeCallback : ItemTouchHelper.Callback() {
         isClamped: Boolean,
         isCurrentlyActive: Boolean
     ): Float {
-        // View의 가로 길이의 절반까지만 swipe 되도록
         val min: Float = -view.width.toFloat() / 2
         // RIGHT 방향으로 swipe 막기
         val max: Float = 0f
@@ -111,7 +99,6 @@ class TravelWishlistSwipeCallback : ItemTouchHelper.Callback() {
 
         return min(max(min, x), max)
     }
-
 
 
     private fun setTag(viewHolder: ViewHolder, isClamped: Boolean) {
@@ -140,89 +127,5 @@ class TravelWishlistSwipeCallback : ItemTouchHelper.Callback() {
             previousPosition = null
         }
     }
-    /*
-
-
-
-
-
-
-        override fun onChildDraw(
-            c: Canvas,
-            recyclerView: RecyclerView,
-            viewHolder: ViewHolder,
-            dX: Float,
-            dY: Float,
-            actionState: Int,
-            isCurrentlyActive: Boolean
-        ) {
-            if (actionState == ACTION_STATE_SWIPE) {
-                val view = getView(viewHolder)
-                val isClamped = getTag(viewHolder)
-                val newX = clampViewPositionHorizontal(dX, isClamped, isCurrentlyActive)
-
-                if (newX == -clamp && !isCurrentlyActive) {
-                    getView(viewHolder).animate().translationX(-clamp).setDuration(100L).start()
-                    return
-                }
-                currentDx = newX
-                getDefaultUIUtil().onDraw(
-                    c, recyclerView, view, newX, dY, actionState, isCurrentlyActive
-                )
-            }
-        }
-
-        override fun getSwipeEscapeVelocity(defaultValue: Float): Float = defaultValue * 10
-
-        private fun getView(viewHolder: ViewHolder): View =
-            viewHolder.itemView.findViewById(R.id.ll_item_travel_wishlist)
-
-                private fun setTag(viewHolder: ViewHolder, isClamped: Boolean) {
-                    viewHolder.itemView.tag = isClamped
-                }
-                fun removePreviousClamp(recyclerView: RecyclerView) {
-                    if (currentPosition == previousPosition) return
-
-                    previousPosition?.let {
-                        val viewHolder = recyclerView.findViewHolderForAdapterPosition(it) ?: return
-                        getView(viewHolder).animate().x(0f).setDuration(100L).start()
-                        setTag(viewHolder, false)
-                        previousPosition = null
-                    }
-
-                }
-        private fun clampViewPositionHorizontal(
-            dX: Float,
-            isClamped: Boolean,
-            isCurrentlyActive: Boolean
-        ): Float {
-            // RIGHT 방향으로 swipe 막기
-            val max = 0f
-
-            // 고정할 수 있으면
-            val newX = if (isClamped) {
-                // 현재 swipe 중이면 swipe되는 영역 제한
-                if (isCurrentlyActive)
-                // 오른쪽 swipe일 때
-                    if (dX < 0) dX / 3 - clamp
-                    // 왼쪽 swipe일 때
-                    else dX - clamp
-                // swipe 중이 아니면 고정시키기
-                else -clamp
-            }
-            // 고정할 수 없으면 newX는 스와이프한 만큼
-            else dX / 3
-
-            // newX가 0보다 작은지 확인
-            return min(newX, max)
-        }
-
-        private fun getTag(viewHolder: ViewHolder): Boolean =
-            viewHolder.itemView.tag as? Boolean ?: false
-
-        fun setClamp(clamp: Float) {
-            this.clamp = clamp
-        }
-    */
 
 }

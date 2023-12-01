@@ -25,17 +25,19 @@ data class TravelBody(
     @SerializedName("items")
     val items: TravelEntityList
 )
+
 data class TravelEntityList(
     @SerializedName("item")
     val travelEntities: List<TravelEntity>
 )
+
 data class TravelEntity(
     @SerializedName("title")
-    val travelTitle : String,
+    val travelTitle: String,
     @SerializedName("firstimage")
-    val travelImage : String,
+    val travelImage: String,
     @SerializedName("addr1")
-    val travelAddress : String,
+    val travelAddress: String,
     @SerializedName("overview")
     val travelOverview: String,
 )

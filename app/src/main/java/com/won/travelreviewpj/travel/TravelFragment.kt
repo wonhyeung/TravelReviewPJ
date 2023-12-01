@@ -19,7 +19,6 @@ class TravelFragment :
     ViewBindingBaseFragment<FragmentTravelBinding>(FragmentTravelBinding::inflate) {
 
     private val viewModel: TravelViewModel by viewModels()
-    private val wishListViewModel: TravelWishlistViewModel by viewModels()
     private var currentTravelEntity: TravelEntity? = null // 전역변수 선언
 
     override fun onCreateView(
