@@ -32,6 +32,7 @@ class RecordFragment :
         notifyRecord()
         bindingSet()
         getFireStoreRecord()
+        observeRecords()
 
     }
 
@@ -70,7 +71,7 @@ class RecordFragment :
         imageSelector(dialogView)
 
         button.setOnClickListener {
-            val record = Record(editText.text.toString(), selectedImageResource)
+            val record = Record("", editText.text.toString(), selectedImageResource)
             insertFireStore(record)
             dialog.dismiss()
         }
@@ -131,21 +132,22 @@ class RecordFragment :
     private fun insertFireStore(record: Record) {
         lifecycleScope.launch {
             recordViewModel.insertRecord(record)
+            recordViewModel.getRecords()
             Toast.makeText(context, "파일 생성", Toast.LENGTH_SHORT).show()
-            getFireStoreRecord()
+            Log.e("insertRecord", "${record.id}, ${record.image}, ${record.name}")
+
         }
     }
 
 
     private fun getFireStoreRecord() {
         lifecycleScope.launch {
-            val records = recordViewModel.getRecords()
-            notifyRecord(records)
+            recordViewModel.getRecords()
         }
     }
 
     private fun notifyRecord(records: List<Record> = emptyList()) {
-        recordAdapter = RecordAdapter(R.layout.item_folder)
+        recordAdapter = RecordAdapter(R.layout.item_folder, recordViewModel, this)
         with(binding) {
             recordGridLayoutManager =
                 GridLayoutManager(context, 2, LinearLayoutManager.VERTICAL, false)
@@ -154,6 +156,12 @@ class RecordFragment :
             recordAdapter.notifyRecordList(records)
 
             rvRecordSelect.adapter = recordAdapter
+        }
+    }
+
+    private fun observeRecords() {
+        recordViewModel.records.observe(viewLifecycleOwner) { records ->
+            recordAdapter.notifyRecordList(records)
         }
     }
 
