@@ -9,14 +9,11 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.won.travelreviewpj.common.ViewBindingBaseFragment
 import com.won.travelreviewpj.databinding.FragmentTravelWishlistDetailBinding
-import com.won.travelreviewpj.travel.wishlist.TravelWishlistViewModel
 
 class TravelWishlistDetailFragment :
     ViewBindingBaseFragment<FragmentTravelWishlistDetailBinding>(FragmentTravelWishlistDetailBinding::inflate) {
 
     private val viewModel: TravelWishlistDetailViewModel by viewModels()
-  //  private val travelWishlistArgs: TravelFragmentArgs by navArgs()
-    private val travelWishlistViewModel: TravelWishlistViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
