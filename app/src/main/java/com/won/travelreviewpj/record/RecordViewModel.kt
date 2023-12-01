@@ -2,18 +2,26 @@ package com.won.travelreviewpj.record
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 
 class RecordViewModel(application: Application) : AndroidViewModel(application) {
 
     private val recordRepository = RecordRepository()
-    suspend fun insertRecord(record: Record) {
-        recordRepository.insertRecord(record)
+    private val _records = MutableLiveData<List<Record>>()
+    val records: LiveData<List<Record>> get() = _records
+
+    suspend fun insertRecord(record: Record): Record {
+        return recordRepository.insertRecord(record)
     }
 
-    suspend fun getRecords(): List<Record> = withContext(Dispatchers.IO) {
-        recordRepository.getRecords()
+    suspend fun getRecords() {
+        _records.value = recordRepository.getRecords()
+    }
+
+    suspend fun deleteRecord(record: Record) {
+        recordRepository.deleteRecord(record)
+        getRecords()
     }
 
 }
