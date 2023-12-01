@@ -46,6 +46,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("androidx.room:room-runtime:2.6.0")
     implementation("com.google.firebase:firebase-firestore:24.9.1")
+    implementation("com.google.firebase:firebase-storage:20.3.0")
     kapt("androidx.room:room-compiler:2.6.0")
     implementation("com.github.bumptech.glide:glide:4.14.2")
     implementation("androidx.room:room-common:2.6.0")

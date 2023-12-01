@@ -36,12 +36,12 @@
         android:textStyle="bold" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_notepad_companion"
+        android:id="@+id/tv_notepad_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_notepad_record"
         android:layout_alignStart="@id/tv_notepad_record"
         android:layout_marginTop="3dp"
-        android:text="#혼자"
+        android:text="#서울"
         android:textSize="6sp" />
 </RelativeLayout>
