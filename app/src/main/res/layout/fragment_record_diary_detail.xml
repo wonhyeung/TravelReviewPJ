@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFEDDA"
-    tools:context=".record.update.RecordUpdateFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".record.detail.RecordDiaryDetailFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/tb_record_update"
+        android:id="@+id/tb_record_diary_detail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/menu_update"
-        app:title="여행 후기" />
+        app:menu="@menu/menu_detail"
+        app:title="단양 LP음악 충전소"
+        app:titleTextColor="?attr/colorOnSurface" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
@@ -23,15 +24,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tb_record_update">
+        app:layout_constraintTop_toBottomOf="@id/tb_record_diary_detail">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/iv_record_update_image"
-                android:layout_width="match_parent"
+                android:id="@+id/iv_record_diary_detail_image"
+                android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:src="@drawable/travel_sample"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -39,48 +40,50 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_record_update_destination"
+                android:id="@+id/tv_record_diary_detail_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="12dp"
-                android:text="여행지"
+                android:layout_marginTop="6dp"
+                android:text="위치"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_record_update_image" />
+                app:layout_constraintTop_toBottomOf="@id/iv_record_diary_detail_image" />
 
             <RelativeLayout
-                android:id="@+id/rl_record_update_destination"
+                android:id="@+id/rl_record_diary_detail_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_record_update_destination">
+                app:layout_constraintTop_toBottomOf="@id/tv_record_diary_detail_address">
 
                 <ImageView
-                    android:id="@+id/iv_record_update_destination_clip"
+                    android:id="@+id/iv_record_diary_detail_address_clip"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/writing" />
 
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_record_diary_detail_address_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/iv_record_update_destination_clip"
-                    android:layout_alignBottom="@id/iv_record_update_destination_clip"
+                    android:gravity="center"
+                    android:layout_alignTop="@id/iv_record_diary_detail_address_clip"
+                    android:layout_alignBottom="@id/iv_record_diary_detail_address_clip"
                     android:layout_marginStart="70dp"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginEnd="40dp"
+                    android:background="@null"
                     android:maxLines="1"
-                    android:text="아아"
+                    android:text="아아아"
                     android:textSize="12sp" />
-
 
             </RelativeLayout>
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_record_update_companion"
+                android:id="@+id/tv_record_diary_detail_companion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -88,39 +91,39 @@
                 android:text="누구랑?"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rl_record_update_destination" />
+                app:layout_constraintTop_toBottomOf="@id/rl_record_diary_detail_address" />
 
             <RelativeLayout
-                android:id="@+id/rl_record_update_companion"
+                android:id="@+id/rl_record_diary_detail_companion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_record_update_companion">
+                app:layout_constraintTop_toBottomOf="@id/tv_record_diary_detail_companion">
 
                 <ImageView
-                    android:id="@+id/iv_record_update_companion_clip"
+                    android:id="@+id/iv_record_diary_detail_companion_clip"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/writing" />
 
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_record_diary_detail_companion_info"
                     android:layout_width="wrap_content"
+                    android:gravity="center"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/iv_record_update_companion_clip"
-                    android:layout_alignBottom="@id/iv_record_update_companion_clip"
+                    android:layout_alignTop="@id/iv_record_diary_detail_companion_clip"
+                    android:layout_alignBottom="@id/iv_record_diary_detail_companion_clip"
                     android:layout_marginStart="70dp"
                     android:text="아아아"
-                    android:layout_marginEnd="30dp"
-                    android:maxLines="1"
                     android:textSize="12sp" />
 
             </RelativeLayout>
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_record_update_date"
+                android:id="@+id/tv_record_diary_detail_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -128,76 +131,108 @@
                 android:text="언제?"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rl_record_update_companion" />
+                app:layout_constraintTop_toBottomOf="@id/rl_record_diary_detail_companion" />
 
             <RelativeLayout
-                android:id="@+id/rl_record_update_date"
+                android:id="@+id/rl_record_diary_detail_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_record_update_date">
+                app:layout_constraintTop_toBottomOf="@id/tv_record_diary_detail_date">
 
                 <ImageView
-                    android:id="@+id/iv_record_update_date_clip"
+                    android:id="@+id/iv_record_diary_detail_date_clip"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/writing" />
 
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_record_diary_detail_start_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/iv_record_update_date_clip"
-                    android:layout_alignBottom="@id/iv_record_update_date_clip"
+                    android:layout_alignTop="@id/iv_record_diary_detail_date_clip"
+                    android:layout_alignBottom="@id/iv_record_diary_detail_date_clip"
                     android:layout_marginStart="70dp"
-                    android:layout_marginEnd="30dp"
+                    android:background="@null"
+                    android:gravity="center"
                     android:maxLines="1"
-                    android:text="아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_record_diary_detail_date_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/iv_record_diary_detail_date_clip"
+                    android:layout_alignBottom="@id/iv_record_diary_detail_date_clip"
+                    android:layout_toEndOf="@+id/tv_record_diary_detail_start_date"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:visibility="invisible"
+                    android:maxLines="1"
+                    android:text="~"
+                    android:textSize="12sp" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_record_diary_detail_end_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/iv_record_diary_detail_date_clip"
+                    android:layout_alignBottom="@id/iv_record_diary_detail_date_clip"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_toEndOf="@+id/tv_record_diary_detail_start_date"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:maxLines="1"
                     android:textSize="12sp" />
             </RelativeLayout>
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_record_update_plan"
+                android:id="@+id/tv_record_diary_detail_diary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="6dp"
-                android:text="여행 계획"
+                android:text="여행 일기"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rl_record_update_date" />
+                app:layout_constraintTop_toBottomOf="@id/rl_record_diary_detail_date" />
 
             <RelativeLayout
-                android:id="@+id/rl_record_update_plan"
+                android:id="@+id/rl_record_diary_detail_diary_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_record_update_plan">
+                app:layout_constraintTop_toBottomOf="@id/tv_record_diary_detail_diary">
 
                 <ImageView
-                    android:id="@+id/iv_record_update_plan_clip"
+                    android:id="@+id/iv_record_diary_detail_diary_clip"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/writing" />
 
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_record_diary_detail_diary_info"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/iv_record_update_plan_clip"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="50dp"
+                    android:maxLines="12"
+                    android:layout_alignTop="@id/iv_record_diary_detail_diary_clip"
                     android:layout_marginStart="70dp"
                     android:layout_marginTop="30dp"
-                    android:maxLines="12"
-                    android:layout_marginEnd="30dp"
-                    android:text="dk아아"
+                    android:layout_alignBottom="@id/iv_record_diary_detail_diary_clip"
+                    android:text="아아아"
                     android:textSize="12sp" />
             </RelativeLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

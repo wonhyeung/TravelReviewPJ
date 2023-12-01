@@ -12,10 +12,6 @@
         android:id="@+id/btn_build"
         app:showAsAction="always"
         android:title="build" />
-    <item
-        android:icon="@drawable/baseline_delete_24"
-        android:id="@+id/btn_delete"
-        app:showAsAction="always"
-        android:title="delete" />
+
 
 </menu>
