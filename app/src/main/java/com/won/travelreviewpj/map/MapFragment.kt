@@ -2,40 +2,72 @@ package com.won.travelreviewpj.map
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.naver.maps.map.NaverMapSdk
+import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.MapFragment
+import com.naver.maps.map.NaverMap
+import com.naver.maps.map.overlay.Marker
 import com.won.travelreviewpj.R
 import com.won.travelreviewpj.common.ViewBindingBaseFragment
 import com.won.travelreviewpj.databinding.FragmentMapBinding
+import com.won.travelreviewpj.record.diary.RecordDiary
+import kotlinx.coroutines.launch
 
 
 class MapFragment : ViewBindingBaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate) {
 
-    private fun item() = mutableListOf<Map>().apply {
-        add(Map(R.drawable.travel_sample, "111", "혼자"))
-        add(Map(R.drawable.travel_sample, "112", "혼자"))
-        add(Map(R.drawable.travel_sample, "113", "혼자"))
-        add(Map(R.drawable.travel_sample, "114", "혼자"))
-        add(Map(R.drawable.travel_sample, "115", "혼자"))
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        NaverMapSdk.getInstance(requireContext()).client =
-            NaverMapSdk.NaverCloudPlatformClient("r5qlsm0iph")
-    }
-
+    private val mapViewModel: MapViewModel by viewModels()
+    private lateinit var adapter: MapAdapter
+    private lateinit var naverMap: NaverMap
+    private var marker: Marker? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mapSetting()
+        fieldSetup()
+        notifyDiary()
+        observeDiaries()
 
+    }
+    private fun mapSetting() {
+        val mapFragment = childFragmentManager.findFragmentById(binding.mapFragment.id) as MapFragment?
+        mapFragment?.getMapAsync { naverMap ->
+            this.naverMap = naverMap
+        }
+    }
+
+    private fun fieldSetup() {
+        lifecycleScope.launch {
+            mapViewModel.getAllRecordDiary()
+        }
+    }
+
+    private fun notifyDiary(diaries: List<RecordDiary> = emptyList()) {
+        adapter = MapAdapter(R.layout.item_travel) { latLng ->
+            naverMap.moveCamera(CameraUpdate.scrollTo(latLng))
+
+            marker?.map = null
+
+            marker = Marker().apply {
+                position = latLng
+                map = naverMap
+            }
+        }
         val manager = LinearLayoutManager(
             context, LinearLayoutManager.VERTICAL, false
         )
         with(binding) {
             rvMap.layoutManager = manager
-            rvMap.adapter = MapAdapter(item())
+            adapter.notifyMapDiaryList(diaries)
+            rvMap.adapter = adapter
         }
     }
 
+    private fun observeDiaries() {
+        mapViewModel.diaries.observe(viewLifecycleOwner) { diaries ->
+            adapter.notifyMapDiaryList(diaries)
+        }
+    }
 
 }
