@@ -1,9 +1,7 @@
 package com.won.travelreviewpj.record.detail
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -46,7 +44,9 @@ class RecordDiaryDetailFragment : ViewBindingBaseFragment<FragmentRecordDiaryDet
                     tbRecordDiaryDetail.setOnMenuItemClickListener { item ->
                         if (item.itemId == R.id.btn_build) {
                             val action =
-                                RecordDiaryDetailFragmentDirections.actionRecordDetailFragmentToRecordDiaryUpdateFragment(id)
+                                RecordDiaryDetailFragmentDirections.actionRecordDetailFragmentToRecordDiaryUpdateFragment(
+                                    id
+                                )
                             findNavController().navigate(action)
                         }
                         true

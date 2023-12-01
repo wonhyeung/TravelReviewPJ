@@ -1,6 +1,5 @@
 package com.won.travelreviewpj.record.diary
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,10 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.won.travelreviewpj.R
 import com.won.travelreviewpj.common.ViewBindingBaseFragment
 import com.won.travelreviewpj.databinding.FragmentRecordDiaryBinding
-import com.won.travelreviewpj.record.Record
-import com.won.travelreviewpj.record.RecordAdapter
 import kotlinx.coroutines.launch
-import kotlin.math.log
 
 class RecordDiaryFragment :
     ViewBindingBaseFragment<FragmentRecordDiaryBinding>(FragmentRecordDiaryBinding::inflate) {
@@ -55,7 +51,7 @@ class RecordDiaryFragment :
 
     }
 
-    private fun getField(recordId : String) {
+    private fun getField(recordId: String) {
         recordId.let {
             recordViewModel.records.observe(viewLifecycleOwner) { record ->
                 binding.tbRecordFolder.title = record?.name
@@ -64,7 +60,7 @@ class RecordDiaryFragment :
         }
     }
 
-    private fun getFireStoreDiary(recordId : String) {
+    private fun getFireStoreDiary(recordId: String) {
         lifecycleScope.launch {
             recordViewModel.getRecordDiaries(recordId)
         }
@@ -72,8 +68,10 @@ class RecordDiaryFragment :
 
     private fun notifyRecordDiaries(diaries: List<RecordDiary> = emptyList()) {
         val recordId = arguments?.getString("recordId")
-        adapter = RecordDiaryAdapter(R.layout.item_notepad,
-            recordId.toString(),recordViewModel, this)
+        adapter = RecordDiaryAdapter(
+            R.layout.item_notepad,
+            recordId.toString(), recordViewModel, this
+        )
         with(binding) {
             diaryGridLayoutManager =
                 GridLayoutManager(context, 2, LinearLayoutManager.VERTICAL, false)

@@ -9,7 +9,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.geometry.Tm128
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
@@ -27,6 +26,7 @@ class RecordDiaryMapFragment :
     private lateinit var naverMap: NaverMap
     private val repository = RecordDiaryMapRepository()
     private var searchItem: SearchItem? = null
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -93,7 +93,7 @@ class RecordDiaryMapFragment :
             searchItem?.let { item ->
                 val cleanTitle = Html.fromHtml(item.title, Html.FROM_HTML_MODE_LEGACY).toString()
                 val bundle = Bundle()
-                bundle.putString("title",cleanTitle)
+                bundle.putString("title", cleanTitle)
                 bundle.putString("address", item.address)
                 bundle.putString("mapx", item.mapx)
                 bundle.putString("mapy", item.mapy)

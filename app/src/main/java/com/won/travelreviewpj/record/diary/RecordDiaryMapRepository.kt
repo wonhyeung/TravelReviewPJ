@@ -1,8 +1,5 @@
 package com.won.travelreviewpj.record.diary
 
-import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.CameraUpdate
-import com.naver.maps.map.overlay.Marker
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

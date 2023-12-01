@@ -1,7 +1,6 @@
 package com.won.travelreviewpj.record.diary
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.won.travelreviewpj.databinding.ItemNotepadBinding
-import com.won.travelreviewpj.record.detail.RecordDiaryDetailViewModel
 import kotlinx.coroutines.launch
 
 class RecordDiaryAdapter(

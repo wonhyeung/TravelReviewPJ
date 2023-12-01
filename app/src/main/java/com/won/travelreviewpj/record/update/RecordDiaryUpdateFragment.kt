@@ -15,11 +15,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.view.isInvisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
@@ -105,6 +103,7 @@ class RecordDiaryUpdateFragment : ViewBindingBaseFragment<FragmentRecordDiaryUpd
         }
 
     }
+
     private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {
@@ -151,7 +150,7 @@ class RecordDiaryUpdateFragment : ViewBindingBaseFragment<FragmentRecordDiaryUpd
 
     private fun showDateTimePicker(
         startDateText: TextView,
-        line : TextView,
+        line: TextView,
         endDateText: TextView
     ) {
         val startPicker = MaterialDatePicker.Builder.datePicker()
@@ -171,14 +170,14 @@ class RecordDiaryUpdateFragment : ViewBindingBaseFragment<FragmentRecordDiaryUpd
                 startDateText.text =
                     SimpleDateFormat("yyyy년 MM월 dd일", Locale.getDefault()).format(startDate.time)
                 viewModel.scheduleStart = startDateText.text.toString().trim()
-                line.visibility =View.VISIBLE
+                line.visibility = View.VISIBLE
                 endDateText.text =
                     SimpleDateFormat("yyyy년 MM월 dd일", Locale.getDefault()).format(endDate.time)
                 viewModel.scheduleEnd = endDateText.text.toString().trim()
             }
-            endPicker.show(childFragmentManager,endPicker.toString())
+            endPicker.show(childFragmentManager, endPicker.toString())
         }
-        startPicker.show(childFragmentManager,startPicker.toString())
+        startPicker.show(childFragmentManager, startPicker.toString())
     }
 
 

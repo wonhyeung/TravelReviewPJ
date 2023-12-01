@@ -6,8 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.won.travelreviewpj.record.Record
 import com.won.travelreviewpj.record.RecordRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class RecordDiaryViewModel(application: Application) : AndroidViewModel(application) {
     private val recordRepository = RecordRepository()
@@ -22,7 +20,7 @@ class RecordDiaryViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     suspend fun deleteRecordDiary(recordId: String, recordDiary: String) {
-        recordRepository.deleteRecordDiary(recordId ,recordDiary)
+        recordRepository.deleteRecordDiary(recordId, recordDiary)
         getRecordDiaries(recordId)
     }
 
