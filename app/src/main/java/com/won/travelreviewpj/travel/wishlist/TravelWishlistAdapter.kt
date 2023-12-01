@@ -1,21 +1,15 @@
 package com.won.travelreviewpj.travel.wishlist
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.won.travelreviewpj.databinding.ItemTravelWishlistBinding
 
 class TravelWishlistAdapter(
-    var arrayList: MutableList<TravelWishlist>,
+    private var arrayList: MutableList<TravelWishlist>,
     private val viewModel: TravelWishlistViewModel
 ) :
     RecyclerView.Adapter<TravelWishlistAdapter.ItemHolder>() {
@@ -29,9 +23,8 @@ class TravelWishlistAdapter(
     }
 
 
-
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        var item = arrayList[position]
+        val item = arrayList[position]
         with(holder.binding) {
             tvItemTravelWishlistTitle.text = item.wishlistTitle
             tvItemTravelWishlistLocation.text = item.wishlistAddress
@@ -39,17 +32,14 @@ class TravelWishlistAdapter(
                 .load(item.wishlistImage)
                 .centerCrop()
                 .into(ivItemTravelWishlist)
-            llItemTravelWishlistInfo.setOnClickListener {
+            root.setOnClickListener {
                 val action =
-                    TravelWishlistFragmentDirections.actionFragmentTravelWishlistToFragmentTravelPlanUpdate()
+                    TravelWishlistFragmentDirections.actionFragmentTravelWishlistToFragmentTravelWishlistDetail(
+                        item.id
+                    )
                 it.findNavController().navigate(action)
             }
-            ivItemTravelWishlist.setOnClickListener {
-                val action =
-                    TravelWishlistFragmentDirections.actionFragmentTravelWishlistToFragmentTravelWishlistDetail(item.id)
-                it.findNavController().navigate(action)
-            }
-            ivItemTravelWishlist.setOnClickListener {
+            ibItemTravelDelete.setOnClickListener {
                 viewModel.deleteTravelWishlist(item.id)
             }
         }
