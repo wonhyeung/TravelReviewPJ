@@ -93,13 +93,16 @@ class RecordDiaryMapFragment :
             searchItem?.let { item ->
                 val cleanTitle = Html.fromHtml(item.title, Html.FROM_HTML_MODE_LEGACY).toString()
                 val bundle = Bundle()
+                val folderId = arguments?.getString("folderId") ?: ""
+                val recordId = arguments?.getString("recordId")
+                bundle.putString("folderId", folderId)
+                bundle.putString("recordId", recordId)
                 bundle.putString("title", cleanTitle)
                 bundle.putString("address", item.address)
                 bundle.putString("mapx", item.mapx)
                 bundle.putString("mapy", item.mapy)
+                Log.e("UpdateFragment", "$cleanTitle,${item.address}, ${item.mapx}, ${item.mapy}")
 
-                val recordId = arguments?.getString("recordId")
-                bundle.putString("recordId", recordId)
 
                 val fragment = RecordDiaryUpdateFragment()
                 fragment.arguments = bundle

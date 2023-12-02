@@ -6,7 +6,7 @@ import retrofit2.http.Headers
 import retrofit2.http.Query
 
 interface RecordDiaryMapService {
-    @Headers("X-Naver-Client-Id: ", "X-Naver-Client-Secret: ")
+    @Headers("X-Naver-Client-Id: cIwS9Sb0H0whgLNHQSsf", "X-Naver-Client-Secret: IZMfEpO7qU")
     @GET("v1/search/local.json")
     fun searchPlaces(
         @Query("query") query: String,

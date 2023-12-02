@@ -1,6 +1,7 @@
 package com.won.travelreviewpj.record.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -25,10 +26,10 @@ class RecordDiaryDetailFragment : ViewBindingBaseFragment<FragmentRecordDiaryDet
 
     private fun fieldSetUp() {
         val id = arguments?.getString("folderId")
+        val recordId = arguments?.getString("recordId")
         with(binding) {
             id?.let {
-                lifecycleScope.launch {
-                    val recordDiary = viewModel.findRecordDiary(id)
+                viewModel.findRecordDiary(id).observe(viewLifecycleOwner) { recordDiary ->
                     Glide.with(requireContext())
                         .load(recordDiary?.image)
                         .centerCrop()
@@ -45,7 +46,7 @@ class RecordDiaryDetailFragment : ViewBindingBaseFragment<FragmentRecordDiaryDet
                         if (item.itemId == R.id.btn_build) {
                             val action =
                                 RecordDiaryDetailFragmentDirections.actionRecordDetailFragmentToRecordDiaryUpdateFragment(
-                                    id
+                                    recordId.toString(),id, "edit"
                                 )
                             findNavController().navigate(action)
                         }
@@ -53,7 +54,6 @@ class RecordDiaryDetailFragment : ViewBindingBaseFragment<FragmentRecordDiaryDet
                     }
                 }
             }
-
         }
     }
 }

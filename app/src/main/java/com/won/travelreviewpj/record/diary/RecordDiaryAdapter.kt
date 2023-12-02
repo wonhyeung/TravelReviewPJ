@@ -43,7 +43,7 @@ class RecordDiaryAdapter(
             root.setOnClickListener {
                 val action =
                     RecordDiaryFragmentDirections.actionFragmentRecordDiaryToRecordDetailFragment(
-                        recordDiaryData.id
+                        recordId,recordDiaryData.id
                     )
                 it.findNavController().navigate(action)
             }

@@ -1,10 +1,16 @@
 package com.won.travelreviewpj.record
 
+import android.content.ContentValues.TAG
+import android.nfc.Tag
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.firestore
 import com.won.travelreviewpj.record.diary.RecordDiary
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
@@ -107,21 +113,50 @@ class RecordRepository {
         }
     }
 
-    suspend fun findRecordDiary(id: String): RecordDiary? {
+    fun findRecordDiary(id: String): MutableLiveData<RecordDiary?> {
+        val liveData = MutableLiveData<RecordDiary?>()
+        fireStoreDB.collection(fireStoreDiaryName).document(id).get()
+            .addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val diary = documentSnapshot.toObject(RecordDiary::class.java)
+                    diary?.id = documentSnapshot.id
+                    liveData.value = diary
+                } else {
+                    liveData.value = null
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "get failed with ", exception)
+            }
+        return liveData
+    }
+
+    suspend fun updateRecordDiary(recordDiary: RecordDiary) {
         return withContext(Dispatchers.IO) {
-            val document =
-                fireStoreDB.collection(fireStoreDiaryName).document(id).get().await()
-            if (document.exists()) {
-                val diary = document.toObject(RecordDiary::class.java)
-                diary?.id = document.id
-                diary
-            } else {
-                null
+            try {
+                fireStoreDB.collection(fireStoreDiaryName).document(recordDiary.id).set(recordDiary)
+                    .await()
+            } catch (e: Exception) {
+                Log.e("updateRecord", "updateRecord error")
             }
         }
     }
 
     suspend fun getAllRecordDiaries(): List<RecordDiary> {
+        return withContext(Dispatchers.IO) {
+            val documents = fireStoreDB.collection(fireStoreDiaryName).get().await()
+            val diaries = mutableListOf<RecordDiary>()
+            for (document in documents) {
+                val diary = document.toObject(RecordDiary::class.java)
+                diary.id = document.id
+                diaries.add(diary)
+            }
+            diaries
+        }
+    }
+
+
+    suspend fun getSelectedDateDiaries(): List<RecordDiary> {
         return withContext(Dispatchers.IO) {
             val documents = fireStoreDB.collection(fireStoreDiaryName).get().await()
             val diaries = mutableListOf<RecordDiary>()

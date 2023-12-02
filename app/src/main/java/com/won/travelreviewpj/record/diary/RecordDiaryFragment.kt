@@ -35,7 +35,7 @@ class RecordDiaryFragment :
                     if (item.itemId == R.id.btn_add) {
                         val action =
                             RecordDiaryFragmentDirections.actionFragmentRecordDiaryToRecordDiaryUpdateFragment(
-                                recordId
+                                recordId,"add"
                             )
                         Log.e("recordIdㅈㅈ", recordId)
                         findNavController().navigate(action)
