@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageMetadata
@@ -40,12 +41,93 @@ class RecordDiaryUpdateFragment : ViewBindingBaseFragment<FragmentRecordDiaryUpd
     private val viewModel: RecordDiaryUpdateViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fieldSetup()
+        val mode = arguments?.getString("mode") ?: "add"
+        if (mode == "edit") {
+            editFieldSetup()
+        } else {
+            addFieldSetup()
+        }
+
     }
 
-    private fun fieldSetup() {
+    private fun editFieldSetup() {
         val recordId = arguments?.getString("recordId")
+        val args = arguments
+        val id = args?.getString("folderId")
+        with(binding) {
+            id?.let {
+                viewModel.findRecordDiary(id).observe(viewLifecycleOwner) { recordDiary ->
+                    args?.let {
+                        val title = it.getString("title")
+                        val address = it.getString("address")
+                        val mapx = it.getString("mapx")
+                        val mapy = it.getString("mapy")
+                        Log.e("toUpdateFolderId",id)
+                        mbRecordDiaryUpdateLocation.visibility = View.GONE
+                        etRecordDiaryUpdateTitle.setText(recordDiary?.name)
+                        etRecordDiaryUpdateAddress.setText(recordDiary?.address)
+                        etRecordDiaryUpdateCompanion.setText(recordDiary?.companion)
+                        tvRecordDiaryUpdateStartDate.text = recordDiary?.startDate
+                        tvRecordDiaryUpdateDateLine.visibility = View.INVISIBLE
+                        tvRecordDiaryUpdateEndDate.text = recordDiary?.endDate
+                        etRecordDiaryUpdateDiary.setText(recordDiary?.diary)
+                        Glide.with(requireContext())
+                            .load(recordDiary?.image)
+                            .centerCrop()
+                            .into(ibRecordDiaryUpdateImage)
 
+                        ibRecordDiaryUpdateImage.setOnClickListener {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                                getImageFromGallery(Manifest.permission.READ_MEDIA_IMAGES)
+                            } else {
+                                getImageFromGallery(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            }
+                        }
+                        rlRecordDiaryUpdateDate.setOnClickListener {
+                            showDateTimePicker(
+                                tvRecordDiaryUpdateStartDate,
+                                tvRecordDiaryUpdateDateLine,
+                                tvRecordDiaryUpdateEndDate
+                            )
+                        }
+                        tbRecordDiaryUpdate.setOnMenuItemClickListener { item ->
+                            if (item.itemId == R.id.btn_update) {
+                                uploadImageToFirebaseStorage(imageUri.toString())
+                                val recordDiary =
+                                    RecordDiary(
+                                        id,
+                                        etRecordDiaryUpdateTitle.text.toString(),
+                                        imageUri.toString(),
+                                        etRecordDiaryUpdateAddress.text.toString(),
+                                        etRecordDiaryUpdateCompanion.text.toString(),
+                                        tvRecordDiaryUpdateStartDate.text.toString(),
+                                        tvRecordDiaryUpdateEndDate.text.toString(),
+                                        etRecordDiaryUpdateDiary.text.toString(),
+                                        mapx.toString(),
+                                        mapy.toString()
+                                    )
+                                Log.e("update", recordId.toString())
+
+                                if (imageUri == null) {
+                                    Toast.makeText(context, "이미지를 선택해주세요", Toast.LENGTH_SHORT)
+                                        .show()
+                                } else {
+                                    updateDiaryFireStore(recordDiary)
+                                }
+                            }
+                            true
+                        }
+
+
+                    }
+                }
+            }
+
+        }
+    }
+
+    private fun addFieldSetup() {
+        val recordId = arguments?.getString("recordId")
         with(binding) {
             arguments?.let {
                 val title = it.getString("title")
@@ -58,10 +140,9 @@ class RecordDiaryUpdateFragment : ViewBindingBaseFragment<FragmentRecordDiaryUpd
                 mbRecordDiaryUpdateLocation.setOnClickListener {
                     val action =
                         RecordDiaryUpdateFragmentDirections.actionRecordDiaryUpdateFragmentToRecordDiaryMap(
-                            recordId.toString()
+                            recordId.toString(),""
                         )
                     findNavController().navigate(action)
-
                 }
                 ibRecordDiaryUpdateImage.setOnClickListener {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -70,6 +151,15 @@ class RecordDiaryUpdateFragment : ViewBindingBaseFragment<FragmentRecordDiaryUpd
                         getImageFromGallery(Manifest.permission.READ_EXTERNAL_STORAGE)
                     }
                 }
+
+                rlRecordDiaryUpdateDate.setOnClickListener {
+                    showDateTimePicker(
+                        tvRecordDiaryUpdateStartDate,
+                        tvRecordDiaryUpdateDateLine,
+                        tvRecordDiaryUpdateEndDate
+                    )
+                }
+
                 tbRecordDiaryUpdate.setOnMenuItemClickListener { item ->
                     if (item.itemId == R.id.btn_update) {
                         uploadImageToFirebaseStorage(imageUri.toString())
@@ -86,18 +176,12 @@ class RecordDiaryUpdateFragment : ViewBindingBaseFragment<FragmentRecordDiaryUpd
                                 mapx.toString(),
                                 mapy.toString()
                             )
+                        Log.e("insertDiary", recordId.toString())
                         insertDiaryFireStore(recordId.toString(), recordDiary)
-
                     }
                     true
                 }
-                rlRecordDiaryUpdateDate.setOnClickListener {
-                    showDateTimePicker(
-                        tvRecordDiaryUpdateStartDate,
-                        tvRecordDiaryUpdateDateLine,
-                        tvRecordDiaryUpdateEndDate
-                    )
-                }
+
 
             }
         }
@@ -134,6 +218,18 @@ class RecordDiaryUpdateFragment : ViewBindingBaseFragment<FragmentRecordDiaryUpd
             false -> {
                 Toast.makeText(context, "권한이 설정되지 않았습니다", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun updateDiaryFireStore(recordDiary: RecordDiary) {
+        lifecycleScope.launch {
+            viewModel.updateRecordDiary(recordDiary)
+            val folderId = recordDiary.id
+            val action =
+                RecordDiaryUpdateFragmentDirections.actionRecordDiaryUpdateFragmentToRecordDetailFragment(
+                    folderId
+                )
+            findNavController().navigate(action)
         }
     }
 
@@ -220,6 +316,10 @@ class RecordDiaryUpdateFragment : ViewBindingBaseFragment<FragmentRecordDiaryUpd
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+    }
 
 }
 
