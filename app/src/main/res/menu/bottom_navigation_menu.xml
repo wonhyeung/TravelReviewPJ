@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:icon="@drawable/ic_travel_24"
+        android:id="@+id/fragment_travel"
+        android:title="@string/bottom_travel" />
+
+    <item
+        android:icon="@drawable/ic_save_24"
+        android:id="@+id/fragment_record"
+        android:title="@string/bottom_record" />
+
+    <item
+        android:icon="@drawable/ic_calendar_24"
+        android:id="@+id/fragment_schedule"
+        android:title="@string/bottom_schedule" />
+
+    <item
+        android:icon="@drawable/ic_map_24"
+        android:id="@+id/fragment_map"
+        android:title="@string/bottom_map" />
+
+</menu>

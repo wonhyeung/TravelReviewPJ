@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_folder_image"
+        android:layout_width="@dimen/small_image_margin_width"
+        android:layout_height="@dimen/small_image_margin_height"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_folder_blue" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_folder_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/folder_name"
+        app:layout_constraintEnd_toEndOf="@+id/iv_folder_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_folder_image" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

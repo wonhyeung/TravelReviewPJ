@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">TravelReviewPJ</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="travel_record">여행 기록</string>
+    <string name="location">위치</string>
+    <string name="companion">동행자</string>
+    <string name="date">날짜</string>
+    <string name="tilde">~</string>
+    <string name="record_diary">여행 일기</string>
+    <string name="search_location">위치 검색</string>
+    <string name="save">저장</string>
+    <string name="travel">여행지</string>
+    <string name="schedule">스케줄</string>
+    <string name="detail_info">상세 정보</string>
+    <string name="wishlist">위시리스트</string>
+    <string name="folder_name">폴더 이름</string>
+    <string name="folder_create">폴더 생성</string>
+    <string name="bottom_travel">Travel</string>
+    <string name="bottom_record">Record</string>
+    <string name="bottom_schedule">Schedule</string>
+    <string name="bottom_map">Map</string>
+    <string name="title_add">add</string>
+    <string name="title_share">share</string>
+    <string name="title_build">build</string>
+    <string name="title_update">update</string>
+
+    <string name="save_wishlist">위시리스트에 저장하시겠습니까?</string>
+    <string name="delete_folder">폴더를 삭제하시겠습니까?</string>
+    <string name="delete_diary">일기를 삭제하시겠습니까?</string>
+    <string name="request_permission">권한이 없습니다.</string>
+    <string name="request_image">이미지를 선택해주세요.</string>
+    <string name="success_upload">업로드 성공</string>
+    <string name="share">공유하기</string>
+    <string name="no">no</string>
+    <string name="yes">yes</string>
+    <string name="date_format">00년 00월 00일</string>
+</resources>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".record.diary.detail.RecordDiaryDetailFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/tb_record_diary_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_detail"
+        app:navigationIcon="@drawable/ic_arrow_back_24"
+        app:titleTextColor="?attr/colorOnSurface" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tb_record_diary_detail">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_record_diary_detail_image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_record_diary_detail_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/tiny_margin"
+                android:text="@string/location"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_record_diary_detail_image" />
+
+            <RelativeLayout
+                android:id="@+id/rl_record_diary_detail_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_record_diary_detail_address">
+
+                <ImageView
+                    android:id="@+id/iv_record_diary_detail_address_clip"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/image_note" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_record_diary_detail_address_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/iv_record_diary_detail_address_clip"
+                    android:layout_alignBottom="@id/iv_record_diary_detail_address_clip"
+                    android:layout_marginStart="@dimen/image_text_margin_start"
+                    android:layout_marginEnd="@dimen/image_text_margin_end"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_record_diary_detail_companion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/tiny_margin"
+                android:text="@string/companion"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rl_record_diary_detail_address" />
+
+            <RelativeLayout
+                android:id="@+id/rl_record_diary_detail_companion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_record_diary_detail_companion">
+
+                <ImageView
+                    android:id="@+id/iv_record_diary_detail_companion_clip"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/image_note" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_record_diary_detail_companion_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/iv_record_diary_detail_companion_clip"
+                    android:layout_alignBottom="@id/iv_record_diary_detail_companion_clip"
+                    android:layout_marginStart="@dimen/image_text_margin_start"
+                    android:layout_marginEnd="@dimen/image_text_margin_end"
+                    android:gravity="center"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_record_diary_detail_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/tiny_margin"
+                android:text="@string/date"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rl_record_diary_detail_companion" />
+
+            <RelativeLayout
+                android:id="@+id/rl_record_diary_detail_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_record_diary_detail_date">
+
+                <ImageView
+                    android:id="@+id/iv_record_diary_detail_date_clip"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/image_note" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_record_diary_detail_start_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/iv_record_diary_detail_date_clip"
+                    android:layout_alignBottom="@id/iv_record_diary_detail_date_clip"
+                    android:layout_marginStart="@dimen/image_text_margin_start"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:textSize="12sp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_record_diary_detail_date_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/iv_record_diary_detail_date_clip"
+                    android:layout_alignBottom="@id/iv_record_diary_detail_date_clip"
+                    android:layout_toEndOf="@+id/tv_record_diary_detail_start_date"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="@string/tilde"
+                    android:textSize="12sp"
+                    android:visibility="invisible" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_record_diary_detail_end_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/iv_record_diary_detail_date_clip"
+                    android:layout_alignBottom="@id/iv_record_diary_detail_date_clip"
+                    android:layout_marginStart="@dimen/small_margin"
+                    android:layout_marginEnd="@dimen/image_text_margin_end"
+                    android:layout_toEndOf="@+id/tv_record_diary_detail_start_date"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_record_diary_detail_diary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/tiny_margin"
+                android:text="@string/record_diary"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rl_record_diary_detail_date" />
+
+            <RelativeLayout
+                android:id="@+id/rl_record_diary_detail_diary_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_record_diary_detail_diary">
+
+                <ImageView
+                    android:id="@+id/iv_record_diary_detail_diary_clip"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/image_note" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_record_diary_detail_diary_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignTop="@id/iv_record_diary_detail_diary_clip"
+                    android:layout_alignBottom="@id/iv_record_diary_detail_diary_clip"
+                    android:layout_marginStart="@dimen/image_text_margin_start"
+                    android:layout_marginTop="@dimen/big_margin"
+                    android:layout_marginEnd="@dimen/image_text_margin_end"
+                    android:layout_marginBottom="@dimen/big_margin"
+                    android:maxLines="12"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

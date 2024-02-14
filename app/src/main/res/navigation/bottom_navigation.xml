@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation"
+    app:startDestination="@id/fragment_travel">
+
+    <fragment
+        android:id="@+id/fragment_travel"
+        android:name="com.won.travelreviewpj.travel.TravelFragment"
+        android:label="fragment_travel"
+        tools:layout="@layout/fragment_travel">
+        <action
+            android:id="@+id/action_fragment_travel_to_fragment_travel_wishlist"
+            app:destination="@id/fragment_travel_wishlist" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_travel_wishlist"
+        android:name="com.won.travelreviewpj.travel.wishlist.TravelWishlistFragment"
+        android:label="fragment_travel_wishlist"
+        tools:layout="@layout/fragment_travel_wishlist">
+        <action
+            android:id="@+id/action_fragment_travel_wishlist_to_fragment_travel_wishlist_detail"
+            app:destination="@id/fragment_travel_wishlist_detail">
+
+            <argument
+                android:name="travelWishlistId"
+                app:argType="long" />
+
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_travel_wishlist_detail"
+        android:name="com.won.travelreviewpj.travel.wishlist.detail.TravelWishlistDetailFragment"
+        android:label="fragment_travel_wishlist_detail"
+        tools:layout="@layout/fragment_travel_wishlist_detail">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_record"
+        android:name="com.won.travelreviewpj.record.RecordFragment"
+        android:label="fragment_record"
+        tools:layout="@layout/fragment_record">
+        <action
+            android:id="@+id/action_recordFragment_to_recordDiaryFragment"
+            app:destination="@id/fragment_record_diary">
+            <argument
+                android:name="recordId"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_record_diary"
+        android:name="com.won.travelreviewpj.record.diary.RecordDiaryFragment"
+        android:label="fragment_record_diary"
+        tools:layout="@layout/fragment_record_diary">
+        <action
+            android:id="@+id/action_fragment_record_diary_to_recordDiaryUpdateFragment"
+            app:destination="@id/recordDiaryUpdateFragment">
+            <argument
+                android:name="recordId"
+                app:argType="string" />
+            <argument
+                android:name="mode"
+                android:defaultValue="add"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_fragment_record_diary_to_recordDetailFragment"
+            app:destination="@id/recordDetailFragment">
+            <argument
+                android:name="recordId"
+                app:argType="string" />
+            <argument
+                android:name="folderId"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_fragment_record_diary_to_fragment_record"
+            app:destination="@id/fragment_record" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/recordDiaryUpdateFragment"
+        android:name="com.won.travelreviewpj.record.diary.update.RecordDiaryUpdateFragment"
+        android:label="fragment_record_diary_update"
+        tools:layout="@layout/fragment_record_diary_update">
+        <action
+            android:id="@+id/action_recordDiaryUpdateFragment_to_recordDiaryMap"
+            app:destination="@id/recordDiaryMapFragment">
+            <argument
+                android:name="recordId"
+                app:argType="string" />
+            <argument
+                android:name="folderId"
+                app:argType="string" />
+        </action>
+
+        <action
+            android:id="@+id/action_recordDiaryUpdateFragment_to_fragment_record_diary"
+            app:destination="@id/fragment_record_diary">
+            <argument
+                android:name="recordId"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_recordDiaryUpdateFragment_to_recordDiaryMapFragment"
+            app:destination="@id/recordDiaryMapFragment" />
+        <action
+            android:id="@+id/action_recordDiaryUpdateFragment_to_recordDetailFragment"
+            app:destination="@id/recordDetailFragment">
+            <argument
+                android:name="folderId"
+                app:argType="string" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/recordDetailFragment"
+        android:name="com.won.travelreviewpj.record.diary.detail.RecordDiaryDetailFragment"
+        android:label="fragment_record_detail"
+        tools:layout="@layout/fragment_record_diary_detail">
+        <action
+            android:id="@+id/action_recordDetailFragment_to_recordDiaryUpdateFragment"
+            app:destination="@id/recordDiaryUpdateFragment">
+            <argument
+                android:name="recordId"
+                app:argType="string" />
+            <argument
+                android:name="folderId"
+                app:argType="string" />
+            <argument
+                android:name="mode"
+                android:defaultValue="edit"
+                app:argType="string" />
+
+        </action>
+        <action
+            android:id="@+id/action_recordDetailFragment_to_fragment_record_diary"
+            app:destination="@id/fragment_record_diary" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/recordDiaryMapFragment"
+        android:name="com.won.travelreviewpj.record.diary.map.RecordDiaryMapFragment"
+        android:label="fragment_record_diary_map"
+        tools:layout="@layout/fragment_record_diary_map">
+
+        <action
+            android:id="@+id/action_recordDiaryMapFragment_to_recordDiaryUpdateFragment"
+            app:destination="@id/recordDiaryUpdateFragment">
+            <argument
+                android:name="recordId"
+                app:argType="string" />
+            <argument
+                android:name="folderId"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_map"
+        android:name="com.won.travelreviewpj.map.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map">
+
+        <action
+            android:id="@+id/action_fragment_map_to_recordDetailFragment"
+            app:destination="@id/recordDetailFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/fragment_schedule"
+        android:name="com.won.travelreviewpj.schedule.ScheduleFragment"
+        android:label="fragment_schedule"
+        tools:layout="@layout/fragment_schedule">
+
+    </fragment>
+
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.won.travelreviewpj.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+
+
+</navigation>

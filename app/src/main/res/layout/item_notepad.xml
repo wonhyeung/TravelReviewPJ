@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_clip"
+        android:layout_width="@dimen/medium_image_margin_width"
+        android:layout_height="@dimen/medium_image_margin_height"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/small_margin"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/image_clip" />
+
+    <ImageView
+        android:id="@+id/iv_notepad_record"
+        android:layout_width="@dimen/note_image_margin_width"
+        android:layout_height="@dimen/note_image_margin_height"
+        android:layout_alignStart="@id/iv_clip"
+        android:layout_alignTop="@id/iv_clip"
+        android:layout_marginStart="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:scaleType="fitXY"
+        android:src="@drawable/image_sample" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_notepad_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_notepad_record"
+        android:layout_alignStart="@id/iv_notepad_record"
+        android:text="@string/travel"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_notepad_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_notepad_record"
+        android:layout_alignStart="@id/tv_notepad_record"
+        android:layout_marginTop="3dp"
+        android:text="@string/location"
+        android:textSize="6sp" />
+</RelativeLayout>

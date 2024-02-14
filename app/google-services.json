@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "427078072133",
+    "project_id": "travelreviewpj",
+    "storage_bucket": "travelreviewpj.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:427078072133:android:26d39a04bb8183c795302c",
+        "android_client_info": {
+          "package_name": "com.won.travelreviewpj"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6nDCyggJOBK9UDZRX-2eWPSHVOGYTMPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
